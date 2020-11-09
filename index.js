@@ -8,7 +8,7 @@ const AvailableWaiters = require('./waiter-fac');
 // const Reg = require('./reg')
 const pg = require("pg");
 const Pool = pg.Pool;
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/waiter-availability';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/waiter_availability';
 const pool = new Pool({
   connectionString
 });
@@ -48,22 +48,54 @@ app.use(bodyParser.json())
 app.use(express.static('public'));
 
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
 
-    res.render('index')
+  res.render('index')
 });
 
-app.post('/waiters', function(req,res){
-var enterName = req.body.waiters
- res.render('index')
+app.get('/waiter/:username', async function (req, res) {
+  const enterName = req.params.username;
+
+// console.log(x)
+// for(let x =0; x < days.length; i++){
+// console.log(x[i])
+// }
+  //console.log(enterName)
+  let waiterObj = {
+    enterName,
+    days
+  }
+
+
+  // console.log( "fdfdfdfdfdf" +  selectDay)
+  let all = await availableWaiters.getWaiters()
+  res.render('index', {
+    list: await waiterAvail,
+    listed: await all,
+    enterName
+
+  })
+})
+
+app.post('/waiter/:username', async function (req, res) {
+  let name = req.params.username
+  const days = req.body.day;
+
+  let selectedDay;
+  for(let x = 0; x < days.length; x++){
+     day = days[x]
+     console.log('dfdfdfdfdfdfdf'+ day)
+      selectedDay = await availableWaiters.selectDay(day)
+
+  }
+   console.log(selectedDay+ 'sddasasasasasa')
+  //  console.log(day)
+  let waiterAvail = await availableWaiters.insertToTable(name,selectedDay);
+console.log(waiterAvail + "dfdfdfdfdfdfd");
+res.render('index',{
+name
+})
 });
-
-
-
-
-
-
-
 
 
 const PORT = process.env.PORT || 3004;
