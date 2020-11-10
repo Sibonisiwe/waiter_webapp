@@ -1,0 +1,30 @@
+<body>
+    <div class="row">
+        <div class="col-12">
+            <h1>Waiters available</h1>
+            <table>
+                
+                <tr>
+                    {{#each allDays}}
+                    <th>{{this.days}}</th>
+                     {{/each}}
+                </tr>
+               
+                {{#each list}}
+                
+                <tr>
+                    <td>{{this.waiter_name}}</td>
+                </tr>
+
+                {{/each}}
+
+                <hr>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>

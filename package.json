@@ -1,7 +1,6 @@
 {
   "name": "waiter_webapp",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -24,5 +23,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sibonisiwe/waiter_webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sibonisiwe/waiter_webapp/issues"
+  },
+  "homepage": "https://github.com/Sibonisiwe/waiter_webapp#readme",
+  "description": ""
 }

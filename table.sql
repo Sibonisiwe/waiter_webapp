@@ -6,9 +6,9 @@ create table waiters(
 create table working_days(
     id serial not null primary key,
     days varchar not null
-);
+);waiters_available
 
-create table waiters_available(
+create table (
 name int not null,
 days_available int not null,
 FOREIGN KEY(name) REFERENCES waiters(id),

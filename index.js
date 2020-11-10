@@ -48,52 +48,21 @@ app.use(bodyParser.json())
 app.use(express.static('public'));
 
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
 
-  res.render('index')
+  res.render('index',{})
 });
 
-app.get('/waiter/:username', async function (req, res) {
-  const enterName = req.params.username;
 
-// console.log(x)
-// for(let x =0; x < days.length; i++){
-// console.log(x[i])
-// }
-  //console.log(enterName)
-  let waiterObj = {
-    enterName,
-    days
-  }
-
-
-  // console.log( "fdfdfdfdfdf" +  selectDay)
-  let all = await availableWaiters.getWaiters()
-  res.render('index', {
-    list: await waiterAvail,
-    listed: await all,
-    enterName
-
-  })
-})
-
-app.post('/waiter/:username', async function (req, res) {
-  var name = req.params.username
+app.post('/waiter/', async function (req, res) {
+  var name = req.body.waiters;
   var days = req.body.day;
-console.log({days});
-  // let selectedDay;
-  // for(let x = 0; x < days.length; x++){
-  //    day = days[x]
-  //   // console.log('dfdfdfdfdfdfdf'+ day)
-  //     selectedDay = await availableWaiters.selectDay(days)
 
-  // }
-  var availableList = {
-   waiterAvail: await availableWaiters.insertToTable(name,days),
-   list: await availableWaiters.getWaiters()
-  }
-res.render('index',{
-availableList 
+res.render('name-days',{ 
+ waiterAvail: await availableWaiters.insertToTable(name, days),
+  list: await availableWaiters.getWaiters(),
+  
+  allDays: await availableWaiters.getAllDAys()
 })
 });
 
@@ -103,3 +72,15 @@ const PORT = process.env.PORT || 3004;
 app.listen(PORT, function () {
   console.log('App starting on port:', PORT);
 })
+
+
+
+
+[
+  {
+    dayName: 'Thur',
+    waiters: [
+      {name: 'Jan'}
+    ]
+  }
+]

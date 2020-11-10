@@ -2,44 +2,46 @@ module.exports = function AvailableWaiters(pool) {
 
     async function selectName(name) {
         var names = await pool.query(`SELECT (id) FROM waiters WHERE waiter_name = $1`, [name]);
-       
-        return names.rows;
+
+        return names.rows[0].id;
     }
 
 
 
-    async function selectDay(day){
-        console.log({day})
-        
-         var weekDays = await pool.query(`SELECT (id) FROM working_days WHERE days = $1`, [day]);
-       // console.log(weekDays.rows[0].id)
-        return weekDays.rows.id;
-    } 
+    async function selectDay(days) {
+        // console.log({days})
 
-    async function insertToTable(name, day){
+        var weekDays = await pool.query(`SELECT (id) FROM working_days WHERE days = $1`, [days]);
+        //    console.log(weekDays.rows[0].id)
+        return weekDays.rows[0].id;
+    }
+
+    async function insertToTable(name, days) {
+        const day = await getAllDAys()
         var names = await selectName(name);
-        //console.log(names);
-        var days = await selectDay(day)
-        //if(names < 1){
-            await pool.query(`INSERT INTO waiters_available (name, days_available) VALUES($1, $2)`,[names, days]);
+        console.log(names);
+
+        for (const week of day) {
+            for (const workingDays of days) {
+                if(week.days === workingDays) {
+                  var id = await selectDay(workingDays);
+                  console.log(id);
+                  await pool.query(`INSERT INTO waiters_available (name, days_available) VALUES($1, $2)`, [names, id]);
+                }
+            }
         }
-
-   // }
-
-    async function waiters_and_days(){
-
     }
 
-    // async function insertToTable(day){
-    //     var days = await selectName(day);
-    //     //var days = await selectDay(day)
-    //     await pool.query(`INSERT INTO waiters_available (days_available) VALUES $1`, [days]);
-
-    // }
-
-    async function getWaiters(){
-        var all = await pool.query(`SELECT * FROM waiters_available`);
+    
+    async function getWaiters() {
+        var all = await pool.query(`SELECT name, days_available FROM waiters_available`);
+        console.log(all.rows)
         return all.rows;
+    }
+
+    async function getAllDAys() {
+        var allWorkingDays = await pool.query(`SELECT  days FROM working_days`);
+        return allWorkingDays.rows;
     }
 
     return {
@@ -47,5 +49,6 @@ module.exports = function AvailableWaiters(pool) {
         selectDay,
         insertToTable,
         getWaiters,
+        getAllDAys,
     }
 }
