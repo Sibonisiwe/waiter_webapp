@@ -78,22 +78,22 @@ app.get('/waiter/:username', async function (req, res) {
 })
 
 app.post('/waiter/:username', async function (req, res) {
-  let name = req.params.username
-  const days = req.body.day;
+  var name = req.params.username
+  var days = req.body.day;
+console.log({days});
+  // let selectedDay;
+  // for(let x = 0; x < days.length; x++){
+  //    day = days[x]
+  //   // console.log('dfdfdfdfdfdfdf'+ day)
+  //     selectedDay = await availableWaiters.selectDay(days)
 
-  let selectedDay;
-  for(let x = 0; x < days.length; x++){
-     day = days[x]
-     console.log('dfdfdfdfdfdfdf'+ day)
-      selectedDay = await availableWaiters.selectDay(day)
-
+  // }
+  var availableList = {
+   waiterAvail: await availableWaiters.insertToTable(name,days),
+   list: await availableWaiters.getWaiters()
   }
-   console.log(selectedDay+ 'sddasasasasasa')
-  //  console.log(day)
-  let waiterAvail = await availableWaiters.insertToTable(name,selectedDay);
-console.log(waiterAvail + "dfdfdfdfdfdfd");
 res.render('index',{
-name
+availableList 
 })
 });
 

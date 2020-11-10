@@ -9,14 +9,14 @@
     <div class="container">
 
  <div class="row">
-            <div class="">
+            <div class="col-12">
                 <h1>Waiter Availability</h1>
             </div>
         </div>
 
-<form action="/waiter/bro" method="post">
+<form action="/waiter/:username" method="post">
         <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <input type="text" name="waiters" value="" placeholder="enter name" class="enterWaiterName">
                 </div>
             </div>
@@ -27,18 +27,17 @@
                         <strong>Select a Day</strong>
                         <input type="checkbox" name="day" class="check" value="Monday" > Monday
                         <input type="checkbox" name="day" class="check" value="Tuesday" > Tuesday
-                        <input type="checkbox" name="day" class="check" value="wednesday"> Wednesday
-                        <input type="checkbox" name="day" class="check" value="thursday"> Thursday 
-                        <input type="checkbox" name="day" class="check" value="friday"> Friday 
-                        <input type="checkbox" name="day" class="check" value="saturday"> Saturday
-                        <input type="checkbox" name="day" class="check" value="sunday"> Sunday
-
+                        <input type="checkbox" name="day" class="check" value="Wednesday"> Wednesday
+                        <input type="checkbox" name="day" class="check" value="Thursday"> Thursday 
+                        <input type="checkbox" name="day" class="check" value="Friday"> Friday 
+                        <input type="checkbox" name="day" class="check" value="Saturday"> Saturday
+                        
                     </div>
                 </div>
             </div>
 
-            <div class="col-6">
-                    <button class="awaiterddBtn" type="submit" value="button">ADD</button>
+            <div class="col-12">
+                    <button class="awaiterAddBtn" type="submit" value="button">ADD</button>
 
                 </div>
 </form>
