@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+
+    <div class="row">
+        <div class="heading">
+            <h1>The Cuppa Cafe</h1>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <br>
+
+    <a href="/days">
+        <div class="admin">
+            <button class="awaiterAddBtn" type="submit" value="button"></button>
+        </div>
+    </a>
+
+
+    <div class="row">
+        <div class="col-12">
+            {{#if messages.error}}
+            <span class="flashMsg">{{messages.error}}</span>
+            {{/if}}
+        </div>
+    </div>
+
     <div class="container">
 
- <div class="row">
-            <div class="col-12">
-                <h1>Waiter Availability</h1>
-            </div>
-        </div>
+        <form action="/waiter/{{username}}" method="POST">
 
-<form action="/waiter" method="post">
-        <div class="row">
+            <div class="row">
                 <div class="col-12">
-                    <input type="text" name="waiters" value="" placeholder="enter name" class="enterWaiterName">
+                    <input type="text" name="waiters" value="{{username}}" placeholder="enter name"
+                        class="enterWaiterName">
                 </div>
             </div>
 
-             <div class="row">
+            <div class="row">
                 <div class="col-12">
                     <div class="select">
                         <strong>Select a Day</strong>
-                        <input type="checkbox" name="day" class="check" value="Monday" > Monday
-                        <input type="checkbox" name="day" class="check" value="Tuesday" > Tuesday
+                        <input type="checkbox" name="day" class="check" value="Monday"> Monday
+                        <input type="checkbox" name="day" class="check" value="Tuesday"> Tuesday
                         <input type="checkbox" name="day" class="check" value="Wednesday"> Wednesday
-                        <input type="checkbox" name="day" class="check" value="Thursday"> Thursday 
-                        <input type="checkbox" name="day" class="check" value="Friday"> Friday 
+                        <input type="checkbox" name="day" class="check" value="Thursday"> Thursday
+                        <input type="checkbox" name="day" class="check" value="Friday"> Friday
                         <input type="checkbox" name="day" class="check" value="Saturday"> Saturday
-                        
+
                     </div>
                 </div>
             </div>
 
             <div class="col-12">
-                    <button class="awaiterAddBtn" type="submit" value="button">ADD</button>
-
-                </div>
-</form>
+                <a href=""><button class="button-primary btn" type="submit" name="button">Submit</button></a>
+            </div>
+        </form>
 
 
     </div>
 </body>
+
 </html>

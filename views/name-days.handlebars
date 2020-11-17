@@ -1,30 +1,68 @@
 <body>
+
+    {{!-- <div class="row">
+    <div class="col-12">
+        {{#each waiterAvail}}
+        <h6>{{this.days}}</h6>
+        <ul>
+            {{#each this.waiters}}
+                <li>{{this.waiter_name}}</li>
+            {{/each}}
+        </ul>
+        {{/each}}
+    </div>
+</div> --}}
+
+
     <div class="row">
         <div class="col-12">
-            <h1>Waiters available</h1>
-            <table>
-                
-                <tr>
-                    {{#each allDays}}
-                    <th>{{this.days}}</th>
-                     {{/each}}
-                </tr>
-               
-                {{#each list}}
-                
-                <tr>
-                    <td>{{this.waiter_name}}</td>
-                </tr>
-
-                {{/each}}
-
+            <div class="table">
+                <div class="heading">
+                    <h1>Waiters Available</h1>
+                </div>
                 <hr>
+
+
+                <a href="/clear"><button class="button-primary btn" type="" name="button">Clear list</button></a>
+                <a href="/back"><button class="button-primary btn" type="" name="button">Back</button></a>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-12">
+                        {{#if messages.error}}
+                        <span class="flashMsg">{{messages.error}}</span>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <br>
+                <table>
+
+                    <thead>
+                        <tr>
+                            {{#each list}}
+                            <th>{{this.days}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                {{!-- {{#each this.waiters}} --}}
+                                <ul>
+                                <li> {{this.waiters}}</li>
+                                </ul>
+                                {{!-- {{/each}} --}}
+                            </td>
+                        </tr>
+
+                        {{/each}}
+                    </tbody>
+
+                </table>
+            </div>
         </div>
     </div>
-
-
-
-
-
-
+    </div>
 </body>

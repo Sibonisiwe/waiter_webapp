@@ -50,21 +50,57 @@ app.use(express.static('public'));
 
 app.get('/', async function (req, res) {
 
-  res.render('index',{})
+  res.render('index', {})
 });
 
 
-app.post('/waiter/', async function (req, res) {
-  var name = req.body.waiters;
+app.get('/days', async function (req, res) {
+  
+  res.render('name-days', {
+    list: await availableWaiters.adminSchedule(),
+    allDays: await availableWaiters.getAllDAys(),
+    allWaiters: await availableWaiters.getAllWaiters()
+  })
+});
+
+app.post('/waiter/:username', async function (req, res) {
+  var names = req.params.username;
+  console.log(names + "post route dhfdfjdfdhfhj")
+  console.log(req.body)
+
+  var days = req.body.day;
+  if(names && days) {
+    req.flash('error', 'Your shift has been successfully submitted');
+  }
+
+  var shift = await availableWaiters.createWaiterShifts(names, days)
+  res.render('index', {
+    shift,
+    username: names
+  })
+});
+
+app.get('/waiter/:username', async function (req, res) {
+  var username = req.params.username;
   var days = req.body.day;
 
-res.render('name-days',{ 
- waiterAvail: await availableWaiters.insertToTable(name, days),
-  list: await availableWaiters.getWaiters(),
-  
-  allDays: await availableWaiters.getAllDAys()
+  res.render('index', {
+    username
+  })
 })
+
+app.get('/clear', async function (req, res) {
+  var cleared = await availableWaiters.clearNames();
+  if (cleared) {
+    req.flash('error', 'List has been successfully cleared');
+  }
+  res.render('name-days')
 });
+
+app.get('/back', async function (req, res) {
+
+  res.render('index')
+})
 
 
 const PORT = process.env.PORT || 3004;
@@ -76,11 +112,3 @@ app.listen(PORT, function () {
 
 
 
-[
-  {
-    dayName: 'Thur',
-    waiters: [
-      {name: 'Jan'}
-    ]
-  }
-]

@@ -1,20 +1,93 @@
 body {
     background-color: rgb(22, 28, 41);
-    padding-top: 5em;
+    padding-top: 0em;
 }
+.heading h1{
+    color: white;
+    font-family: cursive;
+    margin: 1em;
+
+}
+
 
 .container {
     text-align: center;
     align-self: center;
     font-size: larger;
-    background-color: rgb(116, 158, 158);
+    background-color: rgba(299, 299, 299, 0.1);
     padding: 2em;
+    color: white;
+    font-family: cursive;
+    /* margin: 2em; */
+    /* float: right; */
     
 }
 
+.flashMsg {
+  color: green;
+  background-color: rgba(299, 299, 299, 0.1);
+  padding: 1em;
+  align-self: center;
+  font-size: larger;
+  font-family: cursive;
+}
+.select {
+  color: white;
+  font-family: cursive;
+
+}
+
+.select strong{
+  color: white;
+  font-size: larger;
+  font-family: cursive;
+
+}
+
+input[type='checkbox'] {
+  padding: 2em;
+  color: white;
+}
+
+.check:checked {
+  height: 20px;
+  width: 20px;
+  background-color: chartreuse;
+}
 .enterWaiterName {
     /* margin-left: 2em; */
     border-radius: 7px;
     padding: 5px;
     width: 30%;
 }
+
+.btn {
+  background-color: chartreuse;
+  font-weight: bolder;
+  font-size: larger;
+  padding: 0.2em;
+  font-family: cursive;
+
+}
+
+table {
+    border-collapse: collapse;
+  align-content: center;
+  }
+  
+  table, th, td, tr {
+    border: 3px solid rgb(116, 158, 158);
+    padding: 1em;
+    margin: 2em;
+    width: 50%;
+    color: white;
+    font-size: large;
+  }
+
+  .table li {
+    list-style: none;
+    color: white
+    
+      }
+
+      

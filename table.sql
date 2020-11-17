@@ -6,13 +6,14 @@ create table waiters(
 create table working_days(
     id serial not null primary key,
     days varchar not null
-);waiters_available
+);
 
-create table (
-name int not null,
-days_available int not null,
-FOREIGN KEY(name) REFERENCES waiters(id),
-FOREIGN KEY(days_available) REFERENCES working_days(id)
+create table waiters_available (
+    id serial not null,
+    name int not null,
+    days_available int not null,
+    FOREIGN KEY(name) REFERENCES waiters(id),
+    FOREIGN KEY(days_available) REFERENCES working_days(id)
 );
 
 INSERT INTO waiters(waiter_name) VALUES ('Lwando');
@@ -32,3 +33,14 @@ INSERT INTO working_days(days) VALUES ('Saturday');
 INSERT INTO waiters_available(name, days_available) VALUES ('Lwando','Saturday');
 
 
+SELECT waiters.waiter_name, working_days.days 
+FROM working_days 
+INNER JOIN waiters_available 
+ON working_days.id =  waiters_available.days_available
+INNER JOIN  waiters 
+ON waiters.id = waiters_available.name  
+
+ select * from waiters_available 
+ join working_days 
+ on waiters_available.days_available = working_days.id 
+ join waiters on waiters_available.name = waiters.id; 

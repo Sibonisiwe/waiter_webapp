@@ -15,34 +15,37 @@ describe("The waiters-webApp", function () {
     });
 
     describe("The selection functions", function () {
-        it("should be able to select a name from database", async function () {
+        it("should be able to insert and select a name", async function () {
             let availableWaiters = AvailableWaiters(pool)
-        //    await availableWaiters.selectName('Sinazo')
-             var selectName = await availableWaiters.selectName('Sinazo');
-             console.log(selectName.rows);
-             console.log("edfgvb")
-            assert.deepEqual(2, selectName)
+          await availableWaiters.getWaiterId('Sinazo')
+             //var selectName = await availableWaiters.selectName('Sinazo');
+    
+             
+            assert.equal(14, await availableWaiters.getWaiterId('Sinazo'))
         });
 
-        it("should be able to select a day from database", async function () {
+        
+
+        it("should be able to select a day from database and return the id of the day", async function () {
             let availableWaiters = AvailableWaiters(pool)
             var selectDay = await availableWaiters.selectDay('Saturday');
             assert.deepEqual(6, selectDay);
         });
 
-        it("should be able to select a day from database", async function () {
+        it("should be able to select a day from database and return the id of the day", async function () {
             let availableWaiters = AvailableWaiters(pool)
             var selectDay = await availableWaiters.selectDay('Monday');
             assert.deepEqual(1, selectDay);
         });
     });
 
-    describe("The Insert into function", function(){
+    describe("The createWaiterShifts function", function(){
         it("should be able to insert a name and day into the waiters available table", async function(){
             let availableWaiters = AvailableWaiters(pool)
-       await availableWaiters.insertToTable('Lwando', 'Saturday');
+       await availableWaiters.getWaiterId('Lwando');
+       await availableWaiters.selectDay('Saturday');
             
-            assert.deepEqual([{ days_available: 6, name: 1}], await availableWaiters.getWaiters());
+            assert.equal(6, 1, await availableWaiters.createWaiterShifts('Lwando', 'Saturday'));
         });
 
         it("should be able to insert a name and day into the waiters available table", async function(){
