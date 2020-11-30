@@ -74,7 +74,15 @@ module.exports = function AvailableWaiters(pool) {
         return allWaiters.rows;
     }
 
-
+async function waiterSchedule(name) {
+    var waiterId = await getWaiterId(name)
+    var waiterData =  await pool.query(` select * from waiters_available 
+    join working_days 
+    on waiters_available.days_available = working_days.id 
+    join waiters on waiters_available.name = waiters.id where name = $1;`,[waiterId]);
+    // console.log(allData)
+    return waiterData.rows;
+}
 
     async function joinedData() {
         //var joinedTables = insertToTable(name, days);
@@ -122,6 +130,30 @@ module.exports = function AvailableWaiters(pool) {
         return weekdays
     }
 
+    async function scheduleForWaiter(name) {
+        const weekdays = await getAllDAys()
+        //console.log(weekdays)
+        const schedule = await waiterSchedule(name);
+        // console.log(schedule);
+        weekdays.forEach(async (day) => {
+            day.waiters = []
+            day.checked = ""
+            schedule.forEach(async (waiter) => {
+                //console.log({waiter})
+                if (waiter.days === day.days) {
+                    day.checked = "checked"
+                    // console.log(waiter.waiter_name);
+                    day.waiters.push(waiter.waiter_name);
+
+                }
+                
+            })
+        });
+        // 
+        console.log(weekdays);
+        return weekdays
+    }
+
     async function clearNames() {
         var clearList = await pool.query(`DELETE FROM waiters_available`);
         return clearList;
@@ -136,6 +168,7 @@ module.exports = function AvailableWaiters(pool) {
         getAllWaiters,
         joinedData,
         adminSchedule,
-        clearNames
+        clearNames,
+        scheduleForWaiter
     }
 }

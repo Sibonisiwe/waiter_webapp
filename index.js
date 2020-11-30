@@ -68,8 +68,6 @@ app.get('/days', async function (req, res) {
 
 app.post('/waiter/:username', async function (req, res) {
   var names = req.params.username;
-//  console.log(names + "post route dhfdfjdfdhfhj")
-//  console.log(req.body)
 
   var days = req.body.day;
   if(names && days) {
@@ -80,19 +78,18 @@ app.post('/waiter/:username', async function (req, res) {
   res.render('index', {
     shift,
     username: names,
-    allDays: await availableWaiters.getAllDAys(),
-
-  
+    allDays: await availableWaiters.scheduleForWaiter(names),
+    list: await availableWaiters.adminSchedule(),
+   
   })
 });
 
 app.get('/waiter/:username', async function (req, res) {
   var username = req.params.username;
-  var days = req.body.day;
 
   res.render('index', {
     username,
-    allDays: await availableWaiters.getAllDAys(),
+    allDays: await availableWaiters.scheduleForWaiter(username),
   })
 })
 
