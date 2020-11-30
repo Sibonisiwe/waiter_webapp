@@ -50,23 +50,26 @@ app.use(express.static('public'));
 
 app.get('/', async function (req, res) {
 
-  res.render('index', {})
+  res.render('index', {
+    allDays: await availableWaiters.getAllDAys()
+  })
 });
 
 
 app.get('/days', async function (req, res) {
-  
+  // let name = req.body.username
   res.render('name-days', {
-    list: await availableWaiters.adminSchedule(),
+    list: await availableWaiters.adminSchedule(),  
     allDays: await availableWaiters.getAllDAys(),
     allWaiters: await availableWaiters.getAllWaiters()
   })
+ // console.log(list);
 });
 
 app.post('/waiter/:username', async function (req, res) {
   var names = req.params.username;
-  console.log(names + "post route dhfdfjdfdhfhj")
-  console.log(req.body)
+//  console.log(names + "post route dhfdfjdfdhfhj")
+//  console.log(req.body)
 
   var days = req.body.day;
   if(names && days) {
@@ -76,7 +79,10 @@ app.post('/waiter/:username', async function (req, res) {
   var shift = await availableWaiters.createWaiterShifts(names, days)
   res.render('index', {
     shift,
-    username: names
+    username: names,
+    allDays: await availableWaiters.getAllDAys(),
+
+  
   })
 });
 
@@ -85,7 +91,8 @@ app.get('/waiter/:username', async function (req, res) {
   var days = req.body.day;
 
   res.render('index', {
-    username
+    username,
+    allDays: await availableWaiters.getAllDAys(),
   })
 })
 
@@ -97,13 +104,13 @@ app.get('/clear', async function (req, res) {
   res.render('name-days')
 });
 
-app.get('/back', async function (req, res) {
+// app.get('/back', async function (req, res) {
 
-  res.render('index')
-})
+//   res.render('index')
+// })
 
 
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3005;
 
 app.listen(PORT, function () {
   console.log('App starting on port:', PORT);

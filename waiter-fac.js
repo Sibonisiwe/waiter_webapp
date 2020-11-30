@@ -22,18 +22,35 @@ module.exports = function AvailableWaiters(pool) {
         return weekDays.rows[0].id;
     }
 
+    // async function createWaiterShifts(name, days) {
+    //     var admin = await adminSchedule()
+    //     // console.log({admin:admin[0].waiters})
+    //     var waiterId = await getWaiterId(name);
+
+
+    //     // here we needs the waiter id...
+    //      // for (const week of admin) {
+    //          await pool.query(`delete from waiters_available where name = $1`,[waiterId]);
+    //     for (const workingDay of days) {
+    //         // if (week.days === workingDay) {
+    //         var dayId = await selectDay(workingDay);
+    //         //console.log(dayId);
+    //         await pool.query(`INSERT INTO waiters_available (name, days_available) VALUES($1, $2)`, [waiterId, dayId]);
+    //         // }
+    //     }
+    //     // }
+    //     return admin;
+    // }
+
     async function createWaiterShifts(name, days) {
         var admin = await adminSchedule()
         // console.log({admin:admin[0].waiters})
         var waiterId = await getWaiterId(name);
 
-        // does this waiter already exist?
-        // if not add the waiter
 
         // here we needs the waiter id...
-
-
         // for (const week of admin) {
+        await pool.query(`delete from waiters_available where name = $1`, [waiterId]);
         for (const workingDay of days) {
             // if (week.days === workingDay) {
             var dayId = await selectDay(workingDay);
@@ -76,16 +93,32 @@ module.exports = function AvailableWaiters(pool) {
         // console.log(schedule);
         weekdays.forEach(async (day) => {
             day.waiters = []
+            day.checked = ""
             schedule.forEach(async (waiter) => {
                 //console.log({waiter})
                 if (waiter.days === day.days) {
+                    day.checked = "checked"
                     // console.log(waiter.waiter_name);
                     day.waiters.push(waiter.waiter_name);
+
                 }
+                // if (waiter.days === day.days && waiter.waiter_name === waiters) {
+                //     day.checked = "checked"
+                // }
             })
+
+            if (day.waiters.length === 3) {
+                day.color = "green";
+            }
+            else if (day.waiters.length < 3) {
+                day.color = "orange";
+            }
+            else if (day.waiters.length > 3) {
+                day.color = "red";
+            }
         });
         // 
-        // console.log(weekdays);
+        console.log(weekdays);
         return weekdays
     }
 

@@ -37,11 +37,17 @@
 
     <div class="container">
 
+        <p>Please enter your name in the URL and select working days. For example https://sibo-waiter-availability.herokuapp.com/waiter/name </p>
+<div class="row">
+    <div class="col-12">
+        
+    </div>
+</div>
         <form action="/waiter/{{username}}" method="POST">
 
             <div class="row">
                 <div class="col-12">
-                    <input type="text" name="waiters" value="{{username}}" placeholder="enter name"
+                    <input type="text" name="waiters" value="{{username}}" 
                         class="enterWaiterName">
                 </div>
             </div>
@@ -50,13 +56,10 @@
                 <div class="col-12">
                     <div class="select">
                         <strong>Select a Day</strong>
-                        <input type="checkbox" name="day" class="check" value="Monday"> Monday
-                        <input type="checkbox" name="day" class="check" value="Tuesday"> Tuesday
-                        <input type="checkbox" name="day" class="check" value="Wednesday"> Wednesday
-                        <input type="checkbox" name="day" class="check" value="Thursday"> Thursday
-                        <input type="checkbox" name="day" class="check" value="Friday"> Friday
-                        <input type="checkbox" name="day" class="check" value="Saturday"> Saturday
-
+                        {{#each allDays}}
+                        <input type="checkbox" name="day" class="check" value="{{this.days}}" {{this.checked}}> 
+                        <span>{{this.days}}</span>
+                       {{/each}}
                     </div>
                 </div>
             </div>

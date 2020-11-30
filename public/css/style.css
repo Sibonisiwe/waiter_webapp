@@ -9,7 +9,9 @@ body {
 
 }
 
-
+span{
+  color: white;
+}
 .container {
     text-align: center;
     align-self: center;
@@ -23,12 +25,20 @@ body {
     
 }
 
+.container p{
+color: lime;
+font-size: x-large;
+font-weight: bold;
+font-family: cursive;
+}
+
 .flashMsg {
-  color: green;
+  color: lime;
   background-color: rgba(299, 299, 299, 0.1);
   padding: 1em;
   align-self: center;
   font-size: larger;
+  font-weight: bold;
   font-family: cursive;
 }
 .select {
@@ -72,7 +82,7 @@ input[type='checkbox'] {
 
 table {
     border-collapse: collapse;
-  align-content: center;
+  align-items: center;
   }
   
   table, th, td, tr {
@@ -82,12 +92,26 @@ table {
     width: 50%;
     color: white;
     font-size: large;
+    align-items: center;
   }
 
   .table li {
     list-style: none;
-    color: white
+    color: white;
+    align-items: center;
     
+  }
+
+      .orange{
+        background-color: orange;
+      }
+
+      .red{
+        background-color: red;
+      }
+
+      .green{
+        background-color: green;
       }
 
       
