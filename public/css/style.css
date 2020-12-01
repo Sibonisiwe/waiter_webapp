@@ -1,6 +1,7 @@
 body {
     background-color: rgb(22, 28, 41);
     padding-top: 0em;
+
 }
 .heading h1{
     color: white;
@@ -82,7 +83,7 @@ input[type='checkbox'] {
 
 table {
     border-collapse: collapse;
-  align-items: center;
+    text-align: center;
   }
   
   table, th, td, tr {
@@ -92,13 +93,15 @@ table {
     width: 50%;
     color: white;
     font-size: large;
-    align-items: center;
+    text-align: center;
   }
 
   .table li {
     list-style: none;
     color: white;
-    align-items: center;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
     
   }
 
@@ -112,6 +115,30 @@ table {
 
       .green{
         background-color: green;
+      }
+
+      .para {
+        color: white;
+        font-size: x-large;
+        font-weight: bold;
+        align-content: center;
+      }
+
+      .one{
+        background-color: orange;
+        color: white;
+        text-align: center;
+      }
+
+      .two{
+        background-color: green;
+        color: white;
+        text-align: center;
+      }
+      .three{
+        background-color: red;
+        color: white;
+        text-align: center;
       }
 
       
