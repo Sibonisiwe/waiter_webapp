@@ -40,20 +40,21 @@ describe("The waiters-webApp", function () {
     });
 
     describe("The createWaiterShifts function", function(){
-        it("should be able to insert a name and day into the waiters available table", async function(){
+        it("should be able to insert a name into the waiters available table", async function(){
             let availableWaiters = AvailableWaiters(pool)
-       await availableWaiters.getWaiterId('Lwando');
-       await availableWaiters.selectDay('Saturday');
-            
-            assert.equal(6, 1, await availableWaiters.createWaiterShifts('Lwando', 'Saturday'));
+       await availableWaiters.createWaiterShifts('Lwando', 'Friday');
+       //await availableWaiters.selectDay('Friday');
+       
+      var insert = await pool.query(`INSERT INTO waiters_available (name, days_available) VALUES('Lwando', 'Friday')`)
+            assert.equal(6, 5, await availableWaiters.createWaiterShifts('Lwando', 'Friday'));
         });
 
-        it("should be able to insert a name and day into the waiters available table", async function(){
-            let availableWaiters = AvailableWaiters(pool)
-       await availableWaiters.insertToTable('Zinzi', 'Tuesday');
+    //     it("should be able to insert a day into the waiters available table", async function(){
+    //         let availableWaiters = AvailableWaiters(pool)
+    //    await availableWaiters.selectDay('Tuesday');
             
-            assert.deepEqual([{ days_available: 2, name: 4}], await availableWaiters.getWaiters());
-        });
+    //         assert.deepEqual(2, await availableWaiters.createWaiterShifts());
+    //     });
     });
 
     after(function () {

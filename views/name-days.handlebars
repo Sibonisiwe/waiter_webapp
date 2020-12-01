@@ -41,8 +41,8 @@
 
                     <thead>
                         <tr>
-                            {{#each list}}
-                            <th style="background-color:{{this.color}}" > {{this.days}}</th>
+                            {{#each allDays}}
+                            <th  > {{this.days}}</th>
                             {{/each}}
                         </tr>
                     </thead>
@@ -50,7 +50,7 @@
 
                         <tr>
                                {{#each list}}
-                            <td>
+                            <td style="background-color:{{this.color}}">
                                 {{#each this.waiters}}
                               <ul>  
                                <li> {{this}} </li>

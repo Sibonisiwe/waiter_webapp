@@ -98,7 +98,7 @@ app.get('/clear', async function (req, res) {
   if (cleared) {
     req.flash('error', 'List has been successfully cleared');
   }
-  res.render('name-days')
+  res.redirect('days')
 });
 
 // app.get('/back', async function (req, res) {
