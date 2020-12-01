@@ -47,18 +47,15 @@ module.exports = function AvailableWaiters(pool) {
         // console.log({admin:admin[0].waiters})
         var waiterId = await getWaiterId(name);
 
-
-        // here we needs the waiter id...
-        // for (const week of admin) {
         await pool.query(`delete from waiters_available where name = $1`, [waiterId]);
         for (const workingDay of days) {
-            // if (week.days === workingDay) {
+           
             var dayId = await selectDay(workingDay);
             //console.log(dayId);
             await pool.query(`INSERT INTO waiters_available (name, days_available) VALUES($1, $2)`, [waiterId, dayId]);
-            // }
+            
         }
-        // }
+        
         return admin;
     }
 

@@ -75,7 +75,7 @@ app.post('/waiter/:username', async function (req, res) {
   }
 
   var shift = await availableWaiters.createWaiterShifts(names, days)
-  res.render('index', {
+  res.render('waiter', {
     shift,
     username: names,
     allDays: await availableWaiters.scheduleForWaiter(names),
@@ -87,7 +87,7 @@ app.post('/waiter/:username', async function (req, res) {
 app.get('/waiter/:username', async function (req, res) {
   var username = req.params.username;
 
-  res.render('index', {
+  res.render('waiter', {
     username,
     allDays: await availableWaiters.scheduleForWaiter(username),
   })

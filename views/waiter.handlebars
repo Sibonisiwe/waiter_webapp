@@ -1,0 +1,41 @@
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>Please select at least three working days</p>
+            </div>
+        </div>
+
+        <form action="/waiter/{{username}}" method="POST">
+
+            <div class="row">
+                <div class="col-12">
+                    {{!-- <input type="text" name="waiters" value="{{username}}"  --}}
+                    {{!-- class="enterWaiterName"> --}}
+                    {{username}}
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="select">
+                        <strong>Select a Day</strong>
+                        {{#each allDays}}
+                        <input type="checkbox" name="day" class="check" value="{{this.days}}" {{this.checked}}>
+                        <span>{{this.days}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <a href=""><button class="button-primary btn" type="submit" name="button">Submit</button></a>
+            </div>
+        </form>
+
+
+    </div>
+    </div>
+</body>

@@ -20,11 +20,11 @@
 
     <br>
 
-    <a href="/days">
+    {{!-- <a href="/days">
         <div class="admin">
             <button class="awaiterAddBtn" type="submit" value="button"></button>
         </div>
-    </a>
+    </a> --}}
 
 
     <div class="row">
@@ -37,40 +37,10 @@
 
     <div class="container">
 
-        <p>Please enter your name in the URL and select working days. For example https://sibo-waiter-availability.herokuapp.com/waiter/name </p>
-<div class="row">
-    <div class="col-12">
-        
-    </div>
-</div>
-        <form action="/waiter/{{username}}" method="POST">
+        <p>Please enter your name in the URL and select working days. 
+            For example https://sibo-waiter-availability.herokuapp.com/waiter/name </p>
 
-            <div class="row">
-                <div class="col-12">
-                    <input type="text" name="waiters" value="{{username}}" 
-                        class="enterWaiterName">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="select">
-                        <strong>Select a Day</strong>
-                        {{#each allDays}}
-                        <input type="checkbox" name="day" class="check" value="{{this.days}}" {{this.checked}}> 
-                        <span>{{this.days}}</span>
-                       {{/each}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <a href=""><button class="button-primary btn" type="submit" name="button">Submit</button></a>
-            </div>
-        </form>
-
-
-    </div>
+      </div>  
 </body>
 
 </html>
